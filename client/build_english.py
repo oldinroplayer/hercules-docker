@@ -28,8 +28,11 @@ PRELUDE = (b'do local n=0 for _,k in ipairs({"jobtbl","SKID","JOBID","EFST_IDs",
            b'setmetatable(t,{__index=function(tt,key) local v if type(old)=="function" then v=old(tt,key) '
            b'elseif type(old)=="table" then v=old[key] end if v==nil then n=n-1 v=n end return v end}) end end end end\n')
 SHIMMED = ('datainfo', 'skillinfoz', 'stateicon')
-# needs files this client does not ship, so it stays Korean
-SKIPPED = ('worldviewdata', 'datainfo/addrandomoptionnametable.lub')
+# needs files this client does not ship, so it stays Korean. For the world map
+# only the message table (dungeon and area names) is taken: it holds every id
+# the client's own table uses. The project's map list names newer maps (and
+# their images) this client lacks, so the client keeps its own list.
+SKIPPED = ('worldviewdata/worldviewdata_list.lub', 'datainfo/addrandomoptionnametable.lub')
 # SystemEN file -> the name the 2020-02-19 exe loads from System/
 # The exe picks the "true" or the "Sak" (Sakray) variant by the servertype in
 # clientinfo.xml and by which NEMO patches are on, so each table is written
