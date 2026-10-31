@@ -17,11 +17,18 @@ writes `clientinfo.xml` and makes a shortcut.
 - **Windows:** double-click `client/install-windows.bat`. Add
   `-Server your.host.name` to the PowerShell line if you are not using
   `ro.numbawon.xyz`.
-- **Steam Deck:** in Desktop Mode, quit Steam completely, then
-  `python3 client/install-steamdeck.py`. It adds "Family RO" to Steam as a
+- **Steam Deck:** in Desktop Mode, quit Steam completely, open Konsole and run
+  `curl -fsSL https://raw.githubusercontent.com/NumbaWon/hercules-docker/main/client/deck-install.sh | bash`
+  (from a checkout, `client/deck-install.sh` or `python3 client/install-steamdeck.py`
+  does the same; options go after `bash -s --`). It adds "Family RO" to Steam as a
   non-Steam game using Proton Experimental; Steam builds the Wine prefix on
   the first launch. In Game Mode set the controller layout to
   keyboard and mouse, the game wants both.
+  To remove it again (shortcut, Proton setting, Wine prefix and the client
+  folder, which asks first), quit Steam and run
+  `curl -fsSL https://raw.githubusercontent.com/NumbaWon/hercules-docker/main/client/deck-uninstall.sh | bash`
+  (`-s -- --keep-files` keeps the folder). Steam's files are backed up as
+  `*.bak-familyro-uninstall` first.
 
 The installers use larger Arial text by default (`client/ragexe-2020-02-19-bigfont.patch`,
 the same patch plus NEMO's "Adjust all fonts logical size" at 2 and "Change all
