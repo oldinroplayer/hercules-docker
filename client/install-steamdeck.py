@@ -23,8 +23,8 @@ import zipfile
 
 ZIP_URL = 'http://rofull.gnjoy.com/Ragnarok_200304.zip'
 ZIP_SHA256 = 'a00bd56f591c097ad84567128a6a2ccadc2ea98dbec7fa58b3a6c5fa94b8d092'
-OVERLAY_URL = 'https://github.com/NumbaWon/hercules-docker/releases/download/client-english-2/english-overlay-2020-02-19.zip'
-OVERLAY_SHA256 = '76a5881d9c22f53b773246c838836e74b9d8dcdf7c27b82fe681608e19251cbe'
+OVERLAY_URL = 'https://github.com/NumbaWon/hercules-docker/releases/download/client-english-3/english-overlay-2020-02-19.zip'
+OVERLAY_SHA256 = '92be37525932a8369548ecfc5149b0f15850477c800729ede1635a53d7b31c24'
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 
