@@ -2,7 +2,7 @@
 """Family RO client installer for the Steam Deck (or any Linux with Steam).
 
 Downloads Gravity's own kRO full client, applies the small exe patch beside
-this script, drops in the do-nothing CDClient.dll, writes clientinfo.xml, then
+this script (larger Arial text by default, --small-font for the original size), drops in the do-nothing CDClient.dll, writes clientinfo.xml, then
 adds "Family RO" to Steam as a non-Steam game that runs under Proton. Steam
 creates the Wine prefix the first time you launch it.
 
@@ -164,6 +164,7 @@ def main():
     ap.add_argument('--dir', default='~/Games/FamilyRO')
     ap.add_argument('--server', default='ro.numbawon.xyz')
     ap.add_argument('--proton', default='proton_experimental')
+    ap.add_argument('--small-font', action='store_true', help='keep the original small text (default is larger Arial)')
     ap.add_argument('--no-english', action='store_true', help='leave the client text Korean')
     ap.add_argument('--no-steam', action='store_true', help='only build the client folder')
     a = ap.parse_args()
@@ -193,7 +194,8 @@ def main():
         zipfile.ZipFile(ov).extractall(d)
 
     exe = os.path.join(d, 'Ragexe_patched.exe')
-    apply_patch(os.path.join(d, 'Ragexe.exe'), exe, os.path.join(HERE, 'ragexe-2020-02-19.patch'))
+    patch = 'ragexe-2020-02-19.patch' if a.small_font else 'ragexe-2020-02-19-bigfont.patch'
+    apply_patch(os.path.join(d, 'Ragexe.exe'), exe, os.path.join(HERE, patch))
     shutil.copy(os.path.join(HERE, 'CDClient.dll'), d)
     shutil.copy(os.path.join(HERE, 'DATA.INI'), d)
     os.makedirs(os.path.join(d, 'data'), exist_ok=True)

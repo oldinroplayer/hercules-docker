@@ -119,6 +119,7 @@ if __name__ == "__main__":
         out.mkdir(parents=True, exist_ok=True)
         for size in (3, 4, 5, 6):
             write(out, "font%d" % size, size)
+        write(out, "font2-arial", 2, "Arial")  # the chosen one
         write(out, "font4-arial", 4, "Arial")
         write(out, "font6-arial", 6, "Arial")
         # A wide, coding-style face: expect to need a smaller size than Arial.

@@ -7,6 +7,8 @@
 # redistributed: the client comes from their server, the patch is a few
 # dozen bytes.
 #
+# The patched exe has larger Arial text; -SmallFont keeps the original size.
+#
 # Run it through install-windows.bat (double-click), or:
 #   powershell -ExecutionPolicy Bypass -File install-windows.ps1 [-Dir C:\Games\FamilyRO] [-Server ro.example.com]
 param(
@@ -16,7 +18,8 @@ param(
     [string]$ZipSha256 = 'a00bd56f591c097ad84567128a6a2ccadc2ea98dbec7fa58b3a6c5fa94b8d092',
     [string]$OverlayUrl = 'https://github.com/NumbaWon/hercules-docker/releases/download/client-english-3/english-overlay-2020-02-19.zip',
     [string]$OverlaySha256 = '92be37525932a8369548ecfc5149b0f15850477c800729ede1635a53d7b31c24',
-    [switch]$NoEnglish
+    [switch]$NoEnglish,
+    [switch]$SmallFont
 )
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -64,7 +67,7 @@ if (-not $NoEnglish) {
 # 3. patch the exe
 $src = Join-Path $Dir 'Ragexe.exe'
 $dst = Join-Path $Dir 'Ragexe_patched.exe'
-$lines = Get-Content (Join-Path $here 'ragexe-2020-02-19.patch') | Where-Object { $_ -and -not $_.StartsWith('#') }
+$lines = Get-Content (Join-Path $here $(if ($SmallFont) { 'ragexe-2020-02-19.patch' } else { 'ragexe-2020-02-19-bigfont.patch' })) | Where-Object { $_ -and -not $_.StartsWith('#') }
 $srcHash = ($lines | Where-Object { $_ -like 'source-sha256 *' }).Split(' ')[1]
 $dstHash = ($lines | Where-Object { $_ -like 'result-sha256 *' }).Split(' ')[1]
 if ((Sha256 $src) -ne $srcHash) { throw 'Ragexe.exe is not the 2020-02-19 build this patch is for' }

@@ -23,6 +23,12 @@ writes `clientinfo.xml` and makes a shortcut.
   the first launch. In Game Mode set the controller layout to
   keyboard and mouse, the game wants both.
 
+The installers use larger Arial text by default (`client/ragexe-2020-02-19-bigfont.patch`,
+the same patch plus NEMO's "Adjust all fonts logical size" at 2 and "Change all
+fonts face" set to Arial; `client/nemo-profiles/font2-arial.log` is its NEMO
+profile). Add `--small-font` / `-SmallFont` for the original size, which uses
+`client/ragexe-2020-02-19.patch`.
+
 `client/ragexe-2020-02-19.patch` lists the byte changes (offset, old bytes,
 new bytes, plus the code section NEMO appends) and checks the exe's SHA-256
 before and after. It was made by patching the original `Ragexe.exe` in NEMO
